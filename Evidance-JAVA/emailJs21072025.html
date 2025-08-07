@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>email</title>
+    <style>
+        .valLab {
+            color: red;
+            visibility: hidden;
+        }
+
+        .valLabX {
+            color: green;
+            visibility: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <form action="" onsubmit="formSubmit(); return false">
+        <fieldset>
+            <legend>Email Checker</legend>
+            <input type="text" name="email" id="email">
+            <br>
+            <label for="valLab" class="valLab" id="emailVal">Email is not Valid</label>
+            <label for="valLab" class="valLabX" id="CemailVal">Email is Valid</label>
+            <br><br>
+            <button type="submit">Submit</button>
+        </fieldset>
+    </form> -->
+    <label for="valLab" class="valLab" id="emailVal">Email is not Valid</label>
+    <label for="valLab" class="valLabX" id="CemailVal">Email is Valid</label>
+    <script>
+        let email = prompt("Enter Your Email").trim();
+        function formSubmit() {
+            // let email = document.getElementById("email").value.trim();
+            let atPos = email.indexOf("@");
+            let latPos = email.lastIndexOf("@");
+            let dotPos = email.lastIndexOf(".");
+            if (!email || latPos == email.length - 1 || atPos < 1 || dotPos < atPos + 2 || dotPos == email.length -1 ) {
+                document.getElementById("emailVal").style.visibility = "visible";
+                document.getElementById("CemailVal").style.visibility = "hidden";
+
+            } else {
+                document.getElementById("emailVal").style.visibility = "hidden";
+                document.getElementById("CemailVal").style.visibility = "visible";
+
+            };
+        }
+        formSubmit()
+
+    </script>
+
+</body>
+
+</html>

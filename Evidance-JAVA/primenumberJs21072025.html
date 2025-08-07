@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+
+<body>
+    <input type="number" name="" oninput="prime()" id="isPrime">
+    <p id="pn"></p>
+    <button onclick="prime()">Check</button>
+    <script>
+        function prime() {
+            var m = parseInt(document.getElementById("isPrime").value);
+            if (isNaN(m) || m < 2) {
+                document.getElementById("pn").innerHTML = m + " Not Prime";
+                return;
+            }
+            for (let i = 2; i <= m - 1; i++) {
+                if (m % i == 0) {
+                    document.getElementById("pn").innerHTML = m + " Not Prime";
+                    return;
+                } 
+            };
+            document.getElementById("pn").innerHTML = m + " is PRIME!";
+        };
+    </script>
+</body>
+
+</html>

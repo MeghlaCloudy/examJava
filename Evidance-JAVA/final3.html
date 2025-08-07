@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3 id="sorted"></h3>
+
+    <script>
+        // let sortedNumbers = number.sort();
+
+
+
+
+      let stringArr = prompt("Please input comma-separated numbers").split(",").map(Number);
+        let sortedNumbers = stringArr.sort((x, y) => x - y);
+
+        alert("Sorted numbers: " + sortedNumbers.join(", "));
+
+        document.getElementById('sorted').innerHTML = "The sorted values are: " + sortedNumbers.join(", ");
+
+
+    </script>
+</body>
+</html>

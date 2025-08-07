@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Manual Validation Form</title>
+    <style>
+        .validation-lbl {
+            visibility: hidden;
+            color: red;
+        }
+    </style>
+    <script>
+
+        function validate() {
+            let username = document.getElementById("username").value;
+            console.log("Username:", username);
+
+            if (!username) {
+                document.getElementById("usernameLbl").style.visibility = 'visible';
+            } else {
+                document.getElementById("usernameLbl").style.visibility = 'hidden';
+            }
+
+            let email = document.getElementById("email").value.trim();
+            console.log("Email:", email);
+
+            let atPos = email.indexOf("@");//4
+            let dotPos = email.lastIndexOf(".");//8
+
+            if (!email || atPos < 1 || dotPos < atPos + 2 || dotPos === email.length - 1) {
+                document.getElementById("emailLbl").style.visibility = 'visible';
+            } else {
+                document.getElementById("emailLbl").style.visibility = 'hidden';
+            }
+
+            let course = document.getElementById("course").value;
+            console.log("Course:", course);
+            if (!course) {
+                console.log("No course selected");
+                showMessage("courseLbl");  // ✅ fixed
+            } else {
+                hideMessage("courseLbl");  // ✅ fixed
+            }
+
+            let password = document.getElementById("password").value;
+            console.log("Password length:", password.length);
+
+            if (!password || password.length < 8 || password.length > 16) {
+                console.log("Password validation failed");
+                showMessage("passwordLbl");
+            } else {
+                hideMessage("passwordLbl");
+            }
+
+            let description = document.getElementById("description").value;
+            console.log("Description:", description);
+            if (!description) {
+                showMessage("descriptionLbl");
+            } else {
+                hideMessage("descriptionLbl");
+            }
+
+            let subject = document.querySelector("input[name='subject']:checked");
+            console.log("Subject selected:", subject ? subject.value : "None");
+            if (!subject) {
+                showMessage("subjectLbl");
+            } else {
+                hideMessage("subjectLbl");
+            }
+
+            let education = document.querySelectorAll("input[name='education']:checked");
+            console.log("Education selected count:", education.length);
+            if (education.length < 2 || education.length > 3) {
+                showMessage("educationLbl");
+            } else {
+                hideMessage("educationLbl");
+            }
+
+            let file = document.getElementById("file").files[0];
+            console.log("File selected:", file ? file.name : "None");
+            if (!file || !file.name.endsWith(".html") || file.size > 400) {
+                console.log("File validation failed");
+                showMessage("fileLbl");
+            } else {
+                hideMessage("fileLbl");
+            }
+
+            console.log("✅ All validations passed");
+            return false; // or return true; if you want to submit normally
+        }
+
+
+        function showMessage(labelId) {
+            document.getElementById(labelId).style.visibility = 'visible';
+        }
+
+        function hideMessage(labelId) {
+            document.getElementById(labelId).style.visibility = 'hidden';
+        }
+    </script>
+</head>
+
+<body>
+
+    <h3>Validation Form</h3>
+
+    <form method="post" onsubmit=" validate(); return false">
+        <input type="hidden" name="id" />
+        <div class="input-container">
+            <input type="text" id="username" name="username" placeholder="Username" /> <br>
+            <label for="username" id="usernameLbl" class="validation-lbl">Username is required</label>
+        </div>
+
+        <div class="input-container">
+            <input type="text" id="email" name="email" placeholder="Email" /> <br>
+            <label for="email" id="emailLbl" class="validation-lbl">Enter a valid email</label>
+        </div>
+
+        <div class="input-container">
+            <input type="password" id="password" name="password" placeholder="Password" /> <br>
+            <label for="password" id="passwordLbl" class="validation-lbl">Password must be 8–16 characters</label>
+        </div>
+
+        <div class="input-container">
+            <label>Description</label> <br>
+            <textarea id="description" name="description"></textarea> <br>
+            <label for="description" id="descriptionLbl" class="validation-lbl">Description is required</label>
+        </div>
+
+        <div class="input-container">
+            <label>Subject</label> <br>
+            <label><input type="radio" name="subject" value="Java" /> Java</label> <br>
+            <label><input type="radio" name="subject" value="C#" /> C#</label> <br>
+            <label><input type="radio" name="subject" value="PHP" /> PHP</label> <br>
+            <label id="subjectLbl" class="validation-lbl">Subject is required</label>
+        </div>
+        <div>
+            <select id="course">
+                <option value="">-- Select a course --</option>
+                <option value="Java">Java</option>
+                <option value="Python">Python</option>
+                <option value="JavaScript">JavaScript</option>
+            </select><br>
+            <label id="courseLbl" class="validation-lbl">Please select a course</label>
+        </div>
+
+
+        <div class="input-container">
+            <label>Education</label> <br>
+            <label><input type="checkbox" name="education" value="SSC" /> SSC</label> <br>
+            <label><input type="checkbox" name="education" value="HSC" /> HSC</label> <br>
+            <label><input type="checkbox" name="education" value="Hns" /> Hns</label> <br>
+            <label><input type="checkbox" name="education" value="Ms" /> Ms</label> <br>
+            <label id="educationLbl" class="validation-lbl">Select 2 or 3 education levels</label>
+        </div>
+
+        <div class="input-container">
+            <input type="file" id="file" name="file" /> <br>
+            <label for="file" id="fileLbl" class="validation-lbl">Upload .html file under 400 bytes</label>
+        </div>
+
+        <div class="input-container">
+            <input type="submit" value="Submit" />
+        </div>
+
+    </form>
+
+</body>
+
+</html>
